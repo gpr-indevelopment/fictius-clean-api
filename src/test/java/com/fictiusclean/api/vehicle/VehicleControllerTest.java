@@ -164,7 +164,7 @@ public class VehicleControllerTest {
         doNothing().when(vehicleService).delete(id);
         // then
         mvc.perform(delete(url))
-                .andExpect(status().isOk())
+                .andExpect(status().isNoContent())
                 .andReturn()
                 .getResponse();
         verify(vehicleService).delete(id);
