@@ -1,5 +1,7 @@
 package com.fictiusclean.api.vehicle.expenses;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fictiusclean.api.vehicle.Vehicle;
 import lombok.Getter;
 import lombok.NonNull;
@@ -24,7 +26,11 @@ public class VehicleGasExpense implements Comparable<VehicleGasExpense>{
 
     private BigDecimal highwayKilometers;
 
-    public VehicleGasExpense(@NonNull Vehicle vehicle, @NonNull BigDecimal gasPrice, BigDecimal cityKilometers, BigDecimal highwayKilometers) {
+    @JsonCreator
+    public VehicleGasExpense(@JsonProperty("vehicle") @NonNull Vehicle vehicle,
+                             @JsonProperty("gasPrice") @NonNull BigDecimal gasPrice,
+                             @JsonProperty("cityKilometers") BigDecimal cityKilometers,
+                             @JsonProperty("highwayKilometers") BigDecimal highwayKilometers) {
         this.vehicle = vehicle;
         this.gasPrice = gasPrice;
         this.cityKilometers = cityKilometers;
