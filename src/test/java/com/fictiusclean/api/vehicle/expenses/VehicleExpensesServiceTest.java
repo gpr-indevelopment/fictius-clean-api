@@ -41,6 +41,7 @@ public class VehicleExpensesServiceTest {
         assertThat(vehicleGasExpense.getVehicle()).isEqualTo(expectedVehicle);
         assertThat(vehicleGasExpense.getValue()).isNotNull();
         assertThat(vehicleGasExpense.getValue()).isPositive();
+        verify(vehicleService).findById(vehicleId);
     }
 
     @Test
@@ -71,5 +72,6 @@ public class VehicleExpensesServiceTest {
         assertThat(gasExpenses).hasSize(3);
         assertThat(gasExpenses.get(0).getValue().compareTo(gasExpenses.get(1).getValue())).isEqualTo(1);
         assertThat(gasExpenses.get(1).getValue().compareTo(gasExpenses.get(2).getValue())).isEqualTo(1);
+        verify(vehicleService).findAll();
     }
 }
