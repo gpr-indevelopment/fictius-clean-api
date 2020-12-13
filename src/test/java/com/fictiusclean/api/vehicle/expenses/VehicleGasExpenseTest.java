@@ -71,4 +71,29 @@ public class VehicleGasExpenseTest {
         String expenseJson = objectMapper.writeValueAsString(expense);
         assertThat(expenseJson).isNotNull();
     }
+
+    @Test
+    public void new_nullGasPrice_throwsException() {
+        assertThatThrownBy(() -> new VehicleGasExpense(new Vehicle(), null, new BigDecimal("20.5"), new BigDecimal("13.2")))
+                .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    public void new_nullVehicle_throwsException() {
+        assertThatThrownBy(() -> new VehicleGasExpense(null, new BigDecimal("2.577"), new BigDecimal("20.5"), new BigDecimal("13.2")))
+                .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    public void new_nullKilometers_calculatesToZeroValue() {
+        // given
+        Vehicle vehicle = Vehicle.builder()
+                .brand("FIAT")
+                .highwayGasLiterPerKilometerRate(new BigDecimal("20.5"))
+                .cityGasLiterPerKilometerRate(new BigDecimal("13.2"))
+                .build();
+        // then
+        VehicleGasExpense vehicleGasExpense = new VehicleGasExpense(vehicle, new BigDecimal("2.577"), null, null);
+        assertThat(vehicleGasExpense.getValue().compareTo(BigDecimal.ZERO)).isEqualTo(0);
+    }
 }
