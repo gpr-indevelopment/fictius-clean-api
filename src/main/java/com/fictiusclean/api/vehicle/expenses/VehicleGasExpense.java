@@ -26,6 +26,8 @@ public class VehicleGasExpense implements Comparable<VehicleGasExpense>{
 
     private BigDecimal highwayKilometers;
 
+    private BigDecimal totalLitersGasSpent;
+
     @JsonCreator
     public VehicleGasExpense(@JsonProperty("vehicle") @NonNull Vehicle vehicle,
                              @JsonProperty("gasPrice") @NonNull BigDecimal gasPrice,
@@ -35,13 +37,14 @@ public class VehicleGasExpense implements Comparable<VehicleGasExpense>{
         this.gasPrice = gasPrice;
         this.cityKilometers = cityKilometers;
         this.highwayKilometers = highwayKilometers;
-        this.value = calculateValue();
+        calculateValue();
     }
 
-    private BigDecimal calculateValue() {
+    private void calculateValue() {
         BigDecimal litersOnCity = Objects.nonNull(cityKilometers) ? cityKilometers.divide(vehicle.getCityGasLiterPerKilometerRate(), MathContext.DECIMAL128) : BigDecimal.ZERO;
         BigDecimal litersOnHighway = Objects.nonNull(highwayKilometers) ? highwayKilometers.divide(vehicle.getHighwayGasLiterPerKilometerRate(), MathContext.DECIMAL128) : BigDecimal.ZERO;
-        return gasPrice.multiply(litersOnCity.add(litersOnHighway), MathContext.DECIMAL128).setScale(15, RoundingMode.CEILING);
+        this.value = gasPrice.multiply(litersOnCity.add(litersOnHighway), MathContext.DECIMAL128).setScale(15, RoundingMode.CEILING);
+        this.totalLitersGasSpent = litersOnCity.add(litersOnHighway);
     }
 
     @Override
