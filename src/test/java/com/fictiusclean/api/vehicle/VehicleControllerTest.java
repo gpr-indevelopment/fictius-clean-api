@@ -2,6 +2,7 @@ package com.fictiusclean.api.vehicle;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fictiusclean.api.vehicle.exception.VehicleNotFoundException;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,7 @@ public class VehicleControllerTest {
         VehicleController vehicleController = new VehicleController(vehicleService);
         mvc = MockMvcBuilders.standaloneSetup(vehicleController).build();
         objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
     }
 
     @Test

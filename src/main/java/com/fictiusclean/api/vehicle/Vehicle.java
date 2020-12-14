@@ -1,7 +1,6 @@
 package com.fictiusclean.api.vehicle;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -36,7 +35,7 @@ public class Vehicle {
 
     @Past
     @NotNull
-    @JsonSerialize(using = ToStringSerializer.class)
+    @JsonFormat(pattern = "MM-dd-yyyy")
     private LocalDate manufacturingDate;
 
     @NotNull
