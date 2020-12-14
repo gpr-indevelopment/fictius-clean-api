@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class VehicleController {
     private final VehicleService vehicleService;
 
     @PostMapping
-    public ResponseEntity<Vehicle> create(@RequestBody Vehicle vehicle) {
+    public ResponseEntity<Vehicle> create(@RequestBody @Valid Vehicle vehicle) {
         Vehicle createdVehicle = vehicleService.create(vehicle);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -39,7 +40,7 @@ public class VehicleController {
     }
 
     @PutMapping
-    public Vehicle update(@RequestBody Vehicle vehicle) {
+    public Vehicle update(@RequestBody @Valid Vehicle vehicle) {
         return vehicleService.update(vehicle);
     }
 
