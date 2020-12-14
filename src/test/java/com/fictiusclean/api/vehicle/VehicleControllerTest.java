@@ -156,7 +156,7 @@ public class VehicleControllerTest {
         // when
         when(vehicleService.update(expectedVehicle)).thenReturn(Vehicle.builder().id(1L).build());
         // then
-        MockHttpServletResponse response = mvc.perform(put(VehicleController.ROOT).contentType(MediaType.APPLICATION_JSON_VALUE).content(objectMapper.writeValueAsString(expectedVehicle)))
+        MockHttpServletResponse response = mvc.perform(put(VehicleController.ROOT + "/1").contentType(MediaType.APPLICATION_JSON_VALUE).content(objectMapper.writeValueAsString(expectedVehicle)))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();

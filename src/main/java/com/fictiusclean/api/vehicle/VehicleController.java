@@ -39,8 +39,8 @@ public class VehicleController {
         return vehicleService.findAll();
     }
 
-    @PutMapping
-    public Vehicle update(@RequestBody @Valid Vehicle vehicle) {
+    @PutMapping("/{id}")
+    public Vehicle update(@RequestBody @Valid Vehicle vehicle, @PathVariable Long id) {
         return vehicleService.update(vehicle);
     }
 
