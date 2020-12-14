@@ -2,7 +2,7 @@
 
 ## Local environment
 
-You can run a local Docker container of the api by using the following command:
+The following commando will run local Docker container of the api on port 8080:
 ```console
 $ docker container run -p 8080:8080 -d pimentgabriel/fictius-clean-api
 ```
@@ -19,3 +19,8 @@ This repository has a GitHub actions workflow that triggers with every commit to
 1. JDK 11 setup.
 2. Build with maven (automated tests run on this step).
 3. Build and push Docker image to Docker Hub.
+
+## API documentation
+
+You can access the Swagger UI on the URI `http://localhost:8080/swagger-ui/index.html`.
+The Swagger API JSON docs can be found on `http://localhost:8080/v2/api-docs`.
