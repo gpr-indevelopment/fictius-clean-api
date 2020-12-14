@@ -2,7 +2,7 @@ name: Fictius-Clean-API CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
